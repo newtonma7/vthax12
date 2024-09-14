@@ -1,6 +1,10 @@
 import streamlit as st
 import time
 from openai import OpenAI
+<<<<<<< Updated upstream:pages/🙏Talk to Goku🙏.py
+=======
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+>>>>>>> Stashed changes:pages/3_🙏Talk to Goku🙏.py
 
 def test():
     response = "Hello Hello hello hello"
@@ -20,9 +24,14 @@ st.divider()
 st.markdown("Hello! Chat with me.")
 
 #set up openai 
+<<<<<<< Updated upstream:pages/🙏Talk to Goku🙏.py
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 if "GPT" not in st.session_state:
     st.session_state["GPT"] = "gpt-3.5-turbo"
+=======
+if "GPT" not in st.session_state:
+    st.session_state["GPT"] = "gpt-4-turbo"
+>>>>>>> Stashed changes:pages/3_🙏Talk to Goku🙏.py
 
 #initial message from Goku
 Goku = st.chat_message("assistant")
@@ -51,7 +60,11 @@ if prompt:
                 for m in st.session_state.messages
             ],
             stream = True,
+<<<<<<< Updated upstream:pages/🙏Talk to Goku🙏.py
             max_tokens= 30 #changeable
+=======
+            max_tokens= 100 #changeable
+>>>>>>> Stashed changes:pages/3_🙏Talk to Goku🙏.py
         )
         response = st.write_stream(stream)        
     st.session_state.messages.append({"role": "assistant", "content": response})
