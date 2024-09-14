@@ -1,0 +1,12 @@
+import openai 
+
+house data accounting location and price in future
+house stats sq ft. bedroom/bathroom, weather, price, location, picture guesstimator tab
+
+location - county, state, school zone, 
+
+income, household #, necessities,
+
+talk to a realtor
+buy tab and rent tab browse tab
+
