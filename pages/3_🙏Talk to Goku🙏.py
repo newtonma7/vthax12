@@ -1,10 +1,7 @@
 import streamlit as st
 import time
 from openai import OpenAI
-<<<<<<< Updated upstream:pages/🙏Talk to Goku🙏.py
-=======
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
->>>>>>> Stashed changes:pages/3_🙏Talk to Goku🙏.py
 
 def test():
     response = "Hello Hello hello hello"
@@ -55,7 +52,7 @@ if prompt:
                 for m in st.session_state.messages
             ],
             stream = True,
-            max_tokens= 100 #changeable
+            max_tokens= 1000 #changeable
         )
         response = st.write_stream(stream)        
     st.session_state.messages.append({"role": "assistant", "content": response})
