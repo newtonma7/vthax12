@@ -1,6 +1,5 @@
 openai
 plotly
-PIL
 dotenv
 pandas
 numpy
