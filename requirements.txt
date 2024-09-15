@@ -1,5 +1,5 @@
 openai
 plotly
-dotenv
+python-dotenv
 pandas
 numpy
