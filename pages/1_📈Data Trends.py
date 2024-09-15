@@ -4,7 +4,33 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 
+# image files
+logo = "gallery/logo.png"
+full_logo = "gallery/fulllogo.png"
+
+# function that uses CSS to design a style for the sidebar logo to make it bigger and generate it
+def set_logo_size():
+    st.markdown("""<style>
+    div[data-testid="stSidebarHeader"] > img, div[data-testid="collapsedControl"] > img {
+        height: 7rem;
+        width: auto;
+    }
+    
+    div[data-testid="stSidebarHeader"], div[data-testid="stSidebarHeader"] > *,
+    div[data-testid="collapsedControl"], div[data-testid="collapsedControl"] > * {
+        display: flex;
+        align-items: center;
+    }
+    </style>""", unsafe_allow_html=True)
+
+    # displays the logo in the sidebar - collapsable
+    st.logo(
+        full_logo,
+        icon_image=logo,
+    )
+
 st.set_page_config(page_title="Data Trends")
+set_logo_size()
 st.title("🏠📈Housing Data Trends📈🏠")
 dataf = pd.read_csv("USRealEstateTrends.csv")
 
