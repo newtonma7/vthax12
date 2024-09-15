@@ -1,6 +1,8 @@
 import time
 from openai import OpenAI
 import streamlit as st
+import os
+from dotenv import load_dotenv
 
 #open css file
 #with open('pages/style.css') as file:
@@ -8,7 +10,9 @@ import streamlit as st
 #st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 # Set your OpenAI API key
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+load_dotenv()
+apiKey=str(os.getenv("KEY"))
+client = OpenAI(api_key=apiKey)
 
 def generate(text):
     response = client.images.generate(

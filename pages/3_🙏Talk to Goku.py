@@ -2,14 +2,12 @@ import streamlit as st
 import time
 from openai import OpenAI
 from PIL import Image
+import os
+from dotenv import load_dotenv
 
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
-
-def test():
-    response = "Hello Hello hello hello"
-    for word in response.split():
-        yield word + " "
-        time.sleep(0.05)
+load_dotenv()
+apiKey=str(os.getenv("KEY"))
+client = OpenAI(api_key=apiKey)
 
 #new assistant page
 st.set_page_config(
@@ -22,7 +20,6 @@ st.title("Hello! I'm Goku")
 st.divider()
 
 #set up openai 
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 if "GPT" not in st.session_state:
     st.session_state["GPT"] = "gpt-4-turbo"
 
