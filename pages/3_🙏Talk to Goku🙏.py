@@ -1,6 +1,8 @@
 import streamlit as st
 import time
 from openai import OpenAI
+from PIL import Image
+
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 def test():
@@ -11,14 +13,13 @@ def test():
 
 #new assistant page
 st.set_page_config(
-    page_title = "🙏 Talk to Goku! 🙏",
-    page_icon= "💀",
+    page_title = "Talk to Goku!",
+    page_icon= "🧸",
 )
 
 #intro
-st.title("hello, this is goku")
+st.title("Hello! I'm Goku")
 st.divider()
-st.markdown("Hello! Chat with me.")
 
 #set up openai 
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
@@ -26,8 +27,8 @@ if "GPT" not in st.session_state:
     st.session_state["GPT"] = "gpt-4-turbo"
 
 #initial message from Goku
-Goku = st.chat_message("assistant")
-Goku.write("👋 Hello! \nHow may I help you today")
+Goku = st.chat_message("assistant", avatar='🧸')
+Goku.write("👋 How may I help you on your house search today?🏠")
 
 #init chat history list
 if "messages" not in st.session_state:
@@ -52,7 +53,7 @@ if prompt:
                 for m in st.session_state.messages
             ],
             stream = True,
-            max_tokens= 1000 #changeable
+            max_tokens= 500 #changeable
         )
         response = st.write_stream(stream)        
     st.session_state.messages.append({"role": "assistant", "content": response})
