@@ -24,6 +24,9 @@ if "GPT" not in st.session_state:
     st.session_state["GPT"] = "gpt-4-turbo"
 
 #initial message from Goku
+key = st.text_input("Please proivde your OpenAI key (Leave blank if .env is set up)")
+if key != "":
+    client = OpenAI(api_key=key)
 Goku = st.chat_message("assistant", avatar='🧸')
 Goku.write("👋 How may I help you on your house search today?🏠")
 

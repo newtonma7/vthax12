@@ -33,6 +33,9 @@ def click_button():
 #title
 st.title("Goku Guesses 😎")
 st.markdown("Lets see what your home could look like.")
+key = st.text_input("Please proivde your OpenAI key (Leave blank if .env is set up)")
+if key != "":
+    client = OpenAI(api_key=key)
 st.divider()
 
 #organization
