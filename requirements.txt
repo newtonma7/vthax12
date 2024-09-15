@@ -1,5 +1,4 @@
 openai
-os
 plotly.graph_objects
 plotly.express
 PIL
