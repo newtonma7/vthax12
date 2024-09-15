@@ -1,6 +1,5 @@
 openai
-plotly.graph_objects
-plotly.express
+plotly
 PIL
 dotenv
 pandas
