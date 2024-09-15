@@ -1,0 +1,9 @@
+openai
+time
+os
+plotly.graph_objects
+plotly.express
+PIL
+dotenv
+pandas
+numpy
