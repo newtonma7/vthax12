@@ -27,7 +27,7 @@ dataf.head()
 
 df_ny = dataf[dataf['SizeRank'] == 1]
 df_ny.drop(["SizeRank", "RegionID", "RegionName", "StateName"], axis=1, inplace=True)
-print(df_ny.head(5))
+df_ny.head(5)
 
 df_bb = dataf[dataf['SizeRank'] == 265]
 df_bb.drop(["SizeRank", "RegionID", "RegionName", "StateName"], axis=1, inplace=True)
