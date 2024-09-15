@@ -5,8 +5,10 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 st.set_page_config(page_title="Data Trends")
-st.title("Housing Data Trends")
+st.title("🏠📈Housing Data Trends📈🏠")
 dataf = pd.read_csv("USRealEstateTrends.csv")
+
+st.markdown("Data shows that in the recent years, housing value has been steadily climbing while actual housing has becoming increasingly scarce. Using data provided by Zillow we find that the prices have been increasing following a quadratic curve. We can observe that Los Angeles, New York, and Blacksburg follow a similar trend line despite being urban and rural areas. To view the graph without trendlines, click on the trendline in the legend on the right of the graph.")
 
 
 #reducing dataframe to just homevalue data
@@ -25,7 +27,7 @@ dataf.head()
 
 df_ny = dataf[dataf['SizeRank'] == 1]
 df_ny.drop(["SizeRank", "RegionID", "RegionName", "StateName"], axis=1, inplace=True)
-df_ny.head()
+print(df_ny.head(5))
 
 df_bb = dataf[dataf['SizeRank'] == 265]
 df_bb.drop(["SizeRank", "RegionID", "RegionName", "StateName"], axis=1, inplace=True)
@@ -35,9 +37,8 @@ df_la = dataf[dataf['SizeRank'] == 2]
 df_la.drop(["SizeRank", "RegionID", "RegionName", "StateName"], axis=1, inplace=True)
 df_la.head()
 
-#averaging the housing prices for each year since the data we got was avg house value for each month
+#averaging all the housing prices for each year
 
-#finding New York avg
 arr1 = df_ny.to_numpy()
 NYarr = arr1[0]
 
@@ -66,10 +67,10 @@ for nums in NYarr:
     if(monthCount >= 48 and monthCount < 60):
         Avg2022NY += nums
         monthCount += 1
-    if(monthCount >= 60 and monthCount < 76):
+    if(monthCount >= 60 and monthCount < 72):
         Avg2023NY += nums
         monthCount += 1
-    if(monthCount >= 76):
+    if(monthCount >= 72):
         Avg2024NY += nums
         monthCount += 1
 
@@ -102,10 +103,10 @@ for nums in BBarr:
     if(monthCount >= 48 and monthCount < 60):
         Avg2022BB += nums
         monthCount += 1
-    if(monthCount >= 60 and monthCount < 80):
+    if(monthCount >= 60 and monthCount < 72):
         Avg2023BB += nums
         monthCount += 1
-    if(monthCount >= 80):
+    if(monthCount >= 72):
         Avg2024BB += nums
         monthCount += 1
 
@@ -147,7 +148,6 @@ for nums in LAarr:
         monthCount += 1
 
 
-
 NYdata = {
     "Avg Housing Value (USD)":[Avg2018NY/12, Avg2019NY/12,Avg2020NY/12,Avg2021NY/12,Avg2022NY/12,Avg2023NY/12],
     "Year": [2018,2019,2020,2021,2022,2023]
@@ -170,15 +170,19 @@ x = [2018,2019,2020,2021,2022,2023]
 y = [Avg2018NY/12, Avg2019NY/12,Avg2020NY/12,Avg2021NY/12,Avg2022NY/12,Avg2023NY/12]
 
 coeff = np.polyfit(x, y, 2)
+coeffLin = np.polyfit(x,y,1)
 p = np.poly1d(coeff)
+pLin = np.poly1d(coeffLin)
 
 xpoly = np.linspace(min(x),max(x),100)
 ypoly = p(xpoly)
 
+yLin = pLin(xpoly)
 
-figNY = px.scatter(NYdata, x='Year', y='Avg Housing Value (USD)', trendline = 'ols', trendline_color_override='darkblue')
+figNY = px.scatter(NYdata, x='Year', y='Avg Housing Value (USD)')
 
 figNY.add_traces(go.Scatter(x= xpoly, y= ypoly, mode='lines', name='Polynomial Trendline'))
+figNY.add_traces(go.Scatter(x= xpoly, y= yLin, mode='lines', name='Linear Trendline'))
 
 st.plotly_chart(figNY)
 
@@ -189,15 +193,19 @@ x = [2018,2019,2020,2021,2022,2023]
 y = [Avg2018BB/12, Avg2019BB/12,Avg2020BB/12,Avg2021BB/12,Avg2022BB/12,Avg2023BB/12]
 
 coeff = np.polyfit(x, y, 2)
+coeffLin = np.polyfit(x,y,1)
 p = np.poly1d(coeff)
+pLin = np.poly1d(coeffLin)
 
 xpoly = np.linspace(min(x),max(x),100)
 ypoly = p(xpoly)
 
+yLin = pLin(xpoly)
 
-figBB = px.scatter(BBdata, x='Year', y='Avg Housing Value (USD)', trendline = 'ols', trendline_color_override='green')
+figBB = px.scatter(BBdata, x='Year', y='Avg Housing Value (USD)')
 
 figBB.add_traces(go.Scatter(x= xpoly, y= ypoly, mode='lines', name='Polynomial Trendline'))
+figBB.add_traces(go.Scatter(x= xpoly, y= yLin, mode='lines', name='Linear Trendline'))
 
 st.plotly_chart(figBB)
 
@@ -209,13 +217,17 @@ y = [Avg2018LA/12, Avg2019LA/12,Avg2020LA/12,Avg2021LA/12,Avg2022LA/12,Avg2023LA
 
 coeff = np.polyfit(x, y, 2)
 p = np.poly1d(coeff)
+coeffLin = np.polyfit(x,y,1)
+pLin = np.poly1d(coeffLin)
 
 xpoly = np.linspace(min(x),max(x),100)
 ypoly = p(xpoly)
 
+yLin = pLin(xpoly)
 
-figLA = px.scatter(LAdata, x='Year', y='Avg Housing Value (USD)', trendline = 'ols', trendline_color_override='purple')
+figLA = px.scatter(LAdata, x='Year', y='Avg Housing Value (USD)')
 
 figLA.add_traces(go.Scatter(x= xpoly, y= ypoly, mode='lines', name='Polynomial Trendline'))
+figLA.add_traces(go.Scatter(x= xpoly, y= yLin, mode='lines', name='Linear Trendline'))
 
 st.plotly_chart(figLA)
