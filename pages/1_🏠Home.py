@@ -1,3 +1,11 @@
+###
+# Class that represents the home page
+#
+# Authors: Richard Nguyen, Newton Ma, Timothy Tran
+# Date: 09/14/2024
+# VTHACKS12
+###
+
 import streamlit as st
 
 # sets the page layout to wide to fill up the page
@@ -15,15 +23,9 @@ house3 = "gallery/houses/house3.jpeg"
 house4 = "gallery/houses/house4.jpeg"
 house5 = "gallery/houses/house5.jpeg"
 
-# function that uses CSS to set the app's background to an image
+### Functions that use CSS and markdown to set fonts, sizes, or images
+# function that uses CSS to set the app's background to an unpacked image from url
 def set_app_bg_hack_url():
-    '''
-    A function to unpack an image from url and set as bg.
-    Returns
-    -------
-    The background.
-    '''
-        
     st.markdown(
          f"""
          <style>
@@ -36,15 +38,8 @@ def set_app_bg_hack_url():
          unsafe_allow_html=True
      )
 
-# function that uses CSS to set the app's header to an image
+# function that uses CSS to set the app's header to an unpacked image from url
 def set_header_bg_hack_url():
-    '''
-    A function to unpack an image from url and set as bg.
-    Returns
-    -------
-    The background.
-    '''
-        
     st.markdown(
          f"""
          <style>
@@ -57,30 +52,33 @@ def set_header_bg_hack_url():
          unsafe_allow_html=True
      )     
 
+# function that uses CSS to design a style for the sidebar logo to make it bigger and generate it
+def set_logo_size():
+    st.markdown("""<style>
+    div[data-testid="stSidebarHeader"] > img, div[data-testid="collapsedControl"] > img {
+        height: 7rem;
+        width: auto;
+    }
+    
+    div[data-testid="stSidebarHeader"], div[data-testid="stSidebarHeader"] > *,
+    div[data-testid="collapsedControl"], div[data-testid="collapsedControl"] > * {
+        display: flex;
+        align-items: center;
+    }
+    </style>""", unsafe_allow_html=True)
+
+    # displays the logo in the sidebar - collapsable
+    st.logo(
+        full_logo,
+        icon_image=logo,
+    )
+
 # calls functions to change the app and header backgrounds
 set_app_bg_hack_url()
 set_header_bg_hack_url()
+set_logo_size()
 
-# defines a style using CSS for the sidebar logo to make it bigger
-st.markdown("""<style>
-  div[data-testid="stSidebarHeader"] > img, div[data-testid="collapsedControl"] > img {
-      height: 7rem;
-      width: auto;
-  }
-  
-  div[data-testid="stSidebarHeader"], div[data-testid="stSidebarHeader"] > *,
-  div[data-testid="collapsedControl"], div[data-testid="collapsedControl"] > * {
-      display: flex;
-      align-items: center;
-  }
-</style>""", unsafe_allow_html=True)
-
-# displays the logo in the sidebar - collapsable
-st.logo(
-    full_logo,
-    icon_image=logo,
-)
-
+### Uses columns to display images and text on the website aesthetically
 # uses columns to display title and image on same line
 welcome_col, mid, logo_col = st.columns([20,1,1.5])
 
